@@ -1,0 +1,7 @@
+F:\VS\Циклы\Циклы\bin\Debug\Циклы.exe.config
+F:\VS\Циклы\Циклы\bin\Debug\Циклы.exe
+F:\VS\Циклы\Циклы\bin\Debug\Циклы.pdb
+F:\VS\Циклы\Циклы\obj\Debug\Циклы.csprojAssemblyReference.cache
+F:\VS\Циклы\Циклы\obj\Debug\Циклы.csproj.CoreCompileInputs.cache
+F:\VS\Циклы\Циклы\obj\Debug\Циклы.exe
+F:\VS\Циклы\Циклы\obj\Debug\Циклы.pdb
