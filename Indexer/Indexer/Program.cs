@@ -22,6 +22,21 @@ namespace Indexer
             {
                 parking.Add(car);
             }
+            foreach(var car in parking)
+            {
+                Console.WriteLine(car);
+
+            }
+            foreach(var item in parking)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            foreach(var name in parking.GetNames())
+            {
+                Console.WriteLine("Имя: " + name);
+            }
+            Console.WriteLine();
             Console.WriteLine(parking["MA023B42"].Name);
             Console.WriteLine(parking["AA543C17"]?.Name);
 
@@ -29,6 +44,8 @@ namespace Indexer
             var num = Console.ReadLine();
             parking[1] = new Car() { Name = "BMW", Number = num };
             Console.WriteLine(parking[1]);
+
+
 
             Console.ReadLine();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Indexer
 {
-    class Parking
+    class Parking : IEnumerable
     {
         private List<Car> _cars = new List<Car>();
         private const int  Max_Cars = 100; 
@@ -73,6 +74,60 @@ namespace Indexer
             {
                 _cars.Remove(car);
             }
+        }
+
+        //public IEnumerator GetEnumerator()
+        //{
+        //    var current = 0;
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        current += i;
+        //        yield return current;
+        //    }
+        //}
+
+        public IEnumerator GetEnumerator()
+        {
+            var current = 0;
+            foreach(var car in _cars)
+            {
+                
+                yield return car;
+            }
+        }
+        public IEnumerable GetNames()
+        {
+            var current = 0;
+            foreach (var car in _cars)
+            {
+
+                yield return car.Name;
+            }
+        }
+
+
+        //public IEnumerator<Car> GetEnumerator()
+        //{
+        //    return _cars.GetEnumerator();
+        //}
+
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return _cars.GetEnumerator();
+        //}
+    }
+    public class ParkingEnumerator : IEnumerator
+    {
+        public object Current => throw new NotImplementedException();
+
+        public bool MoveNext()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
         }
     }
 }
