@@ -8,7 +8,7 @@ namespace Anonymous_Method
 {
     class Program
     {
-        delegate int MyHandler(int i);
+        public delegate int MyHandler(int i);
         static void Main(string[] args)
         {
 
@@ -20,15 +20,26 @@ namespace Anonymous_Method
             };
 
             lesson.Start();
+            Console.WriteLine("Лист: ");
+            var list = new List<int>();
+            for(int i = 0; i < 10; i++)
+            {
+                list.Add(i);
+            }
+            var res = list.Aggregate((x,y) => x + y);
+            Console.WriteLine(res);
 
+            var result1 = Arg(list, delegate (int i)
+            {
+                var r = i * i;
+                Console.WriteLine(r);
+                return r;
+            });
+            var result2 = Arg(list, Method);
 
+            var result3 = Arg(list, x => x * x * x * x);
 
-
-
-
-
-
-
+            
 
 
             if (int.TryParse(Console.ReadLine(), out int result))
@@ -60,6 +71,16 @@ namespace Anonymous_Method
             
         }
 
+        public static int Arg(List<int> list, MyHandler handler)
+        {
+            var result = 0;
+            foreach(var item in list)
+            {
+                result += handler(item);
+               
+            }
+            return result;
+        }
         public static int Method(int i)
         {
             var r = i * i * i;
