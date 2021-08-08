@@ -43,7 +43,7 @@ namespace Base_type_Object
         }
         public override string ToString()
         {
-            return base.ToString();
+            return base.ToString(); // return X.ToString();
         }
 
     }
