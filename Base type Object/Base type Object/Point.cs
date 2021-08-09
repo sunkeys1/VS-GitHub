@@ -9,6 +9,7 @@ namespace Base_type_Object
     class Point
     {
         public int X { get; set; }
+        public Point Y { get; set; } //public MyClass MyClass { get; set; }
 
         public override bool Equals(object obj) // если вылезает null это не должен быть exeption 
         {                                       // и нужно вернуть false
@@ -43,7 +44,18 @@ namespace Base_type_Object
         }
         public override string ToString()
         {
-            return base.ToString(); // return X.ToString();
+            return X.ToString(); //base.ToString(); 
+        }
+
+        public new Type GetType()
+        {
+            return typeof(UInt32);  // переопределение стандартного типа (new)
+
+        }
+        public Point Clone()
+        {
+            return MemberwiseClone() as Point;
+            
         }
 
     }
