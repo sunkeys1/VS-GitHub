@@ -32,7 +32,15 @@ namespace Fitness.BL.Model
         /// Рост.
         /// </summary>
         public double Height { get; set; }
-#endregion
+        #endregion
+        /// <summary>
+        /// Создать нового пользователя.
+        /// </summary>
+        /// <param name="name">Имя.</param>
+        /// <param name="gender">Пол.</param>
+        /// <param name="birthDate">Дата рождения.</param>
+        /// <param name="weight">Вес.</param>
+        /// <param name="height">Рост.</param>
         public User(string name,
                     Gender gender,
                     DateTime birthDate,
