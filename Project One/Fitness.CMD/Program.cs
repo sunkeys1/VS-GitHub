@@ -17,20 +17,49 @@ namespace Fitness.CMD
             Console.WriteLine("Введите имя пользователя: ");
             var name = Console.ReadLine();
 
-            Console.WriteLine("Введите пол: ");
-            var gender = Console.ReadLine();
 
-            Console.WriteLine("Дату рождения: ");
-            var birthdate = DateTime.Parse(Console.ReadLine());
+            var userController = new UserController(name);
+            if (userController.IsNewUser)
+            {
+                Console.Write("Введите пол: ");
+                var gender = Console.ReadLine();
 
-            Console.WriteLine("Введите вес: ");
-            var weight = double.Parse(Console.ReadLine());
+                DateTime birthDate;
+                double weight;
+                double height;
+                while (true)
+                {
+                    Console.Write("Введите дату рождения (dd.MM.yyyy): ");
+                    if (DateTime.TryParse(Console.ReadLine(), out birthDate))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Неверный формат даты рождения.");
+                    }
+                }
+                userController
+            }
+            Console.WriteLine(userController.CurrentUser);
+            Console.ReadLine();
+        }
+        private static T ParseDouble<T>(string name)
+        {
+            while (true)
+            {
+                Console.Write($"Введите {name}: ");
+                if (double.TryParse(Console.ReadLine(), out T value))
+                {
+                    return value
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"Неверный формат {name}.");
+                }
+            }
 
-            Console.WriteLine("Введите рост: ");
-            var height = double.Parse(Console.ReadLine());
-
-            var userController = new UserController(name, gender, birthdate, weight, height);
-            userController.Save();
         }
     }
 }
