@@ -2,7 +2,9 @@
 using Fitness.BL.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +14,11 @@ namespace Fitness.CMD
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Здравствуйте!");
-            Console.WriteLine("Введите имя пользователя: ");
+            var culture = CultureInfo.CreateSpecificCulture("en-us");
+            var resourceManager = new ResourceManager("Fitness.CMD.Languages.Messages", typeof(Program).Assembly);
+
+            Console.WriteLine(resourceManager.GetString("Hello", culture)); // было: Languages.Messages_ru_ru.Hello
+            Console.WriteLine(resourceManager.GetString("EnterName", culture));
             var name = Console.ReadLine();
 
 
@@ -39,8 +44,8 @@ namespace Fitness.CMD
                 var foods = EnterEating();
                 eatingController.Add(foods.Food, foods.Weight);
 
-                foreach(var item in eatingController.Eating.Foods)
-                {
+                foreach(var item in eatingController.Eating.Foods)  // можно попробовать на этом примере сделать
+                {                                                   // вывод уже существующих пользователей
                     Console.WriteLine($"\t{item.Key} - {item.Value}");
 
                 }
