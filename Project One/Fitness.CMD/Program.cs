@@ -1,5 +1,6 @@
 ﻿using Fitness.BL.Controller;
 using Fitness.BL.Model;
+using Fitness.BLTests.Controller;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +25,7 @@ namespace Fitness.CMD
 
             var userController = new UserController(name);
             var eatingController = new EatingController(userController.CurrentUser);
+            var exerciseController = new ExerciseController(userController.CurrentUser);
             if (userController.IsNewUser)
             {
                 Console.Write("Введите пол: ");
@@ -36,22 +38,39 @@ namespace Fitness.CMD
             }
             Console.WriteLine(userController.CurrentUser);
 
-            Console.WriteLine("Что вы хотите сделать?");
-            Console.WriteLine("E - ввести прием пищи");
-            var key = Console.ReadKey();
-            if(key.Key == ConsoleKey.E)
+            while (true)
             {
-                var foods = EnterEating();
-                eatingController.Add(foods.Food, foods.Weight);
+                Console.WriteLine("Что вы хотите сделать?");
+                Console.WriteLine("E - ввести прием пищи");
+                Console.WriteLine("A - ввести упражнение");
+                Console.WriteLine("Q - выход");
+                var key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.E:
+                        var foods = EnterEating();
+                        eatingController.Add(foods.Food, foods.Weight);
 
-                foreach(var item in eatingController.Eating.Foods)  // можно попробовать на этом примере сделать
-                {                                                   // вывод уже существующих пользователей
-                    Console.WriteLine($"\t{item.Key} - {item.Value}");
-
+                        foreach (var item in eatingController.Eating.Foods)  // можно попробовать на этом примере сделать
+                        {                                                   // вывод уже существующих пользователей
+                            Console.WriteLine($"\t{item.Key} - {item.Value}");
+                        }
+                        break;
+                    case ConsoleKey.A:
+                        var exercise = EnterExercise();
+                        break;
+                    case ConsoleKey.Q:
+                        Environment.Exit(0);
+                        break;
                 }
+                Console.ReadLine();
             }
+            
+        }
 
-            Console.ReadLine();
+        private static () EnterExercise() // остановка тут, кортеж
+        {
+            throw new NotImplementedException();
         }
 
         private static (Food Food, double Weight) EnterEating()
