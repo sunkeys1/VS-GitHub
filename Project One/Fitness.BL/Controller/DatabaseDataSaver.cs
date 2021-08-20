@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
-    public class DatabaseDataSaver : IDataSaver
+    public class DatabaseDataSaver<T> : IDataSaver<T> where T : class
     {
-        public T Load<T>(string fileName) where T : class
+        public T Load()
         {
             using (var db = new FitnessContext())
             {
-                var result = db.Set<T>().Where(k => true).ToList(); // тут остановка
+                var result = db.Set<T>().Where().
             }
         }
 
@@ -51,6 +51,11 @@ namespace Fitness.BL.Controller
                 db.SaveChanges();
 
             }
+        }
+
+        public void Save(T item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

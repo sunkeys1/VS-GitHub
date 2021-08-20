@@ -10,12 +10,12 @@ namespace Fitness.BL.Controller
 {
     public abstract class ControllerBase
     {
-        protected IDataSaver saver = new SerializeDataSaver();
+        protected IDataSaver saver = new DatabaseDataSaver();
         protected void Save(string fileName, object item)
         {
             saver.Save(fileName, item);
         }
-        protected T Load<T>(string fileName)
+        protected T Load<T>(string fileName) where T : class
         {
             return saver.Load<T>(fileName);
         }
