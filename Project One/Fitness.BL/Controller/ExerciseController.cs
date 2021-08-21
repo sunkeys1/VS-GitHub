@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Fitness.BLTests.Controller
 {
     
-    public class ExerciseController : ControllerBase
+    public class ExerciseController : ControllerBase<Exercise>
     {
         private readonly User user;
         private const string EXERCISES_FILE_NAME = "exercises.dat";

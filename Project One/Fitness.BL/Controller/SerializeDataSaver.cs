@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
-    class SerializeDataSaver<T> : IDataSaver<T>
+    class SerializeDataSaver<T> : IDataSaver<T> where T : class
     {
-        public T Load()
+        public List<T> Load()
         {
             var formatter = new BinaryFormatter();
             var fileName = typeof(T) + ".dat";
             using (var fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                if (fs.Length > 0 && formatter.Deserialize(fs) is T items)
+                if (fs.Length > 0 && formatter.Deserialize(fs) is List<T> items)
                 {
                     return items;
 
                 }
                 else
                 {
-                    return default(T);
+                    return new List<T>();
                 }
             }
         }
