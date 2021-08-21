@@ -48,6 +48,7 @@ namespace Fitness.BL.Model
         /// <param name="birthDate">Дата рождения.</param>
         /// <param name="weight">Вес.</param>
         /// <param name="height">Рост.</param>
+        public User() { }
         public User(string name,
                     Gender gender,
                     DateTime birthDate,

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
-    class SerializeDataSaver<T> : IDataSaver<T> where T : class
+    class SerializableSaver : IDataSaver
     {
-        public List<T> Load()
+        public List<T> Load<T>() where T : class
         {
             var formatter = new BinaryFormatter();
-            var fileName = typeof(T) + ".dat";
+            var fileName = typeof(T).Name;
             using (var fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
                 if (fs.Length > 0 && formatter.Deserialize(fs) is List<T> items)
@@ -27,10 +27,10 @@ namespace Fitness.BL.Controller
                 }
             }
         }
-        public void Save(T item)
+        public void Save<T>(List<T> item) where T : class
         {
             var formatter = new BinaryFormatter();
-            var fileName = typeof(T) + ".dat";
+            var fileName = typeof(T).Name;
             using (var fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, item);

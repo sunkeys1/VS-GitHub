@@ -9,7 +9,8 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            ContextKey = "FitnessBL.Controller.FitnessContext";
         }
 
         protected override void Seed(Fitness.BL.Controller.FitnessContext context)

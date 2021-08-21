@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
-    public interface IDataSaver<T> where T : class
+    public interface IDataSaver
     {
-        void Save(T item);
-        List<T> Load();
+        void Save<T>(List<T> item) where T : class;
+        List<T> Load<T>() where T : class;
     }
 }

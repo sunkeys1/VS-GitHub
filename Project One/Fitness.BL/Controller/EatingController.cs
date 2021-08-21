@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
-    public class EatingController : ControllerBase<Eating>
+    public class EatingController : ControllerBase
     {
-        private const string FOODS_FILE_NAME = "foods.dat";
-        private const string EATINGS_FILE_NAME = "eatings.dat";
         private readonly User user;
         public List<Food> Foods { get; }
         public Eating Eating { get; }
@@ -42,16 +40,17 @@ namespace Fitness.BL.Controller
 
         private Eating GetEating()
         {
-            return Load().First();
+            return Load<Eating>().FirstOrDefault() ?? new Eating(user);
         }
 
         private List<Food> GetAllFoods()
         {
-            return Load();
+            return Load<Food>() ?? new List<Food>();
         }
         private void Save()
         {
-            Save();
+            Save(Foods);
+            Save(new List<Eating>() { Eating });
         }
     }
 }

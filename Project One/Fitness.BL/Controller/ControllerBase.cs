@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
-    public abstract class ControllerBase<T> where T : class
+    public abstract class ControllerBase
     {
-        protected IDataSaver<T> manager = new SerializeDataSaver<T>();
-        protected void Save(T item)
+        private readonly IDataSaver manager = new DatabaseSaver();
+        protected void Save<T>(List<T> item) where T : class
         {
             manager.Save(item);
         }
-        protected List<T> Load()
+        protected List<T> Load<T>() where T : class
         {
-            return manager.Load();
+            return manager.Load<T>();
         }
     }
 }
