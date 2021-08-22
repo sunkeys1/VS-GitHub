@@ -121,6 +121,6 @@
     <value>Please, enter your name: </value>
   </data>
   <data name="Hello" xml:space="preserve">
-    <value>Hello!</value>
+    <value>Hello! default language</value>
   </data>
 </root>

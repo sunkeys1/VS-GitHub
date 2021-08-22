@@ -70,7 +70,7 @@ namespace Fitness.CMD.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Hello!.
+        ///   Ищет локализованную строку, похожую на Hello! default language.
         /// </summary>
         public static string Hello {
             get {

@@ -10,7 +10,7 @@ namespace Fitness.BL.Controller
 {
     public abstract class ControllerBase
     {
-        private readonly IDataSaver manager = new DatabaseSaver(); // тут меняешь DatabaseSaver // SerializableSaver 
+        private readonly IDataSaver manager = new SerializableSaver(); // тут меняешь DatabaseSaver // SerializableSaver 
         protected void Save<T>(List<T> item) where T : class      // и можно сохранять в разные "формы" БД или файл
         {
             manager.Save(item);
