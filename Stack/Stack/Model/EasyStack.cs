@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stack.Model
 {
-    public class EasyStack<T>
+    public class EasyStack<T> : ICloneable
     {
         private List<T> items = new List<T>();
         public int Count => items.Count;
@@ -14,6 +14,10 @@ namespace Stack.Model
         public void Push(T item)
         {
             items.Add(item);
+        }
+        public void Clear()
+        {
+            items.Clear();
         }
         public T Pop()
         {
@@ -42,6 +46,13 @@ namespace Stack.Model
         public override string ToString()
         {
             return $"Стек с {Count} элементами.";
+        }
+
+        public object Clone()
+        {
+            var newStack = new EasyStack<T>();
+            newStack.items = new List<T>(items);
+            return newStack;
         }
     }
 }

@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\EasyStack.cs" />
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\LinkedStack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

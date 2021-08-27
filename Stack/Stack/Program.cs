@@ -20,6 +20,22 @@ namespace Stack
             Console.WriteLine(item);
             Console.WriteLine(item2);
             Console.ReadLine();
+
+            Stack<double> stack = new Stack<double>();
+
+            var linkedStack = new LinkedStack<int>();
+            linkedStack.Push(10);
+            linkedStack.Push(20);
+            linkedStack.Push(30);
+            linkedStack.Push(40);
+            linkedStack.Push(50);
+            Console.WriteLine(linkedStack.Peek());
+            Console.WriteLine(linkedStack.Pop());
+            Console.WriteLine(linkedStack.Pop());
+            Console.WriteLine(linkedStack.Peek());
+
+
+            Console.ReadLine();
         }
     }
 }
