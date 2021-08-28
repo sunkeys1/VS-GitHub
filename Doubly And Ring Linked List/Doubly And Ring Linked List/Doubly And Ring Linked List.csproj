@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AAD3C760-DC24-4FFE-AB50-BCB46EBE12F0}</ProjectGuid>
+    <ProjectGuid>{F95C0222-ECA5-4A33-BA7D-8302DEA4C5AD}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Linked_List</RootNamespace>
-    <AssemblyName>Linked List</AssemblyName>
+    <RootNamespace>Doubly_And_Ring_Linked_List</RootNamespace>
+    <AssemblyName>Doubly And Ring Linked List</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,10 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\DuplexItem.cs" />
-    <Compile Include="Model\DuplexLinkedList.cs" />
-    <Compile Include="Model\Item.cs" />
-    <Compile Include="Model\LinkedList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
