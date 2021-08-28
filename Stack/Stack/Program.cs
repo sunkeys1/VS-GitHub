@@ -33,9 +33,24 @@ namespace Stack
             Console.WriteLine(linkedStack.Pop());
             Console.WriteLine(linkedStack.Pop());
             Console.WriteLine(linkedStack.Peek());
-
-
             Console.ReadLine();
+
+            var arrayStack = new ArrayStack<int>(5);
+            Console.WriteLine(arrayStack.Count); // посмотреть сколько элементов в массиве занято
+            arrayStack.Push(100);
+            Console.WriteLine(arrayStack.Count);
+            arrayStack.Push(200);
+            arrayStack.Push(300);
+            arrayStack.Push(400);
+            arrayStack.Push(500);
+            Console.WriteLine(arrayStack.Peek());  // Peek - посмотреть элемент
+            Console.WriteLine(arrayStack.Pop());   // Pop - вытащить(убрать?) элемент (самый верхний)
+            Console.WriteLine(arrayStack.Pop());   // Push - добавить элемент сверху
+            Console.WriteLine(arrayStack.Pop());
+            Console.WriteLine(arrayStack.Pop());
+            Console.WriteLine(arrayStack.Pop());
+            Console.ReadLine();
+
         }
     }
 }
