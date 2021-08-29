@@ -28,6 +28,7 @@ namespace Linked_List.Model
                 Head = item;
                 Tail = item;
                 Count = 1;
+                return;
             }
             Tail.Next = item;
             item.Previous = Tail;
@@ -60,8 +61,10 @@ namespace Linked_List.Model
             var current = Tail;
             while(current != null)
             {
-                result.Add(current); // тута остановка
+                result.Add(current.Data);
+                current = current.Previous;
             }
+            return result;
         }
         public IEnumerator GetEnumerator()
         {
