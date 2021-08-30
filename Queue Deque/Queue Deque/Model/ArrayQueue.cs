@@ -12,7 +12,7 @@ namespace Queue_Deque.Model
 
         private T Head => items[Count > 0 ? Count - 1 : 0];
         private T Tail => items[0];
-        private int MaxCount => items.Length();
+        private int MaxCount => items.Length;
         public int Count { get; private set; }
         public ArrayQueue(int size)
         {
@@ -28,17 +28,31 @@ namespace Queue_Deque.Model
         }
         public void Enqueue(T data)
         {
-            var result = new T[MaxCount];
-            result[0] = data;
-            for(int i = 0; i < Count; i++)
-            {
-                result[] // тута стоп
+            if(Count < MaxCount)
+            { 
+                var result = (new T[] { data }).Concat(items);  // мжно так (LINQ)
+                items = result.ToArray();
+                Count++;
+
             }
+            //if (Count < MaxCount)
+            //{
+            //    var result = new T[MaxCount];    // можно и так
+            //    result[0] = data;
+            //    for (int i = 0; i < Count; i++)
+            //    {
+            //        result[i + 1] = items[i];
+            //    }
+            //    items = result;
+            //    Count++;
+            //}
+
+            
         }
         public T Dequeue()
         {
             var item = Head;
-            items.Remove(item);
+            Count--;
             return item;
         }
         public T Peek()
