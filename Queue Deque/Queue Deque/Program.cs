@@ -11,6 +11,39 @@ namespace Queue_Deque
     {
         static void Main(string[] args) // через F2(или нет) можно выделить что-нибудь и изменить имя везде
         {
+            var linkedDeque = new EasyDeque<int>();
+            linkedDeque.PushFront(1);
+            linkedDeque.PushFront(2);
+            linkedDeque.PushFront(3);
+            linkedDeque.PushBack(4);
+            linkedDeque.PushBack(5);
+            linkedDeque.PushFront(6);
+            linkedDeque.PushBack(7);
+            Console.WriteLine(linkedDeque.PopFront());
+            Console.WriteLine(linkedDeque.PopBack());
+            Console.WriteLine(linkedDeque.PopFront());
+            Console.WriteLine(linkedDeque.PopBack());
+
+            Console.ReadLine();
+
+
+            var easyDeque = new EasyDeque<int>();
+            easyDeque.PushFront(1);
+            easyDeque.PushFront(2);
+            easyDeque.PushFront(3);
+            easyDeque.PushBack(40);
+            easyDeque.PushBack(50);
+            easyDeque.PushFront(600);
+            easyDeque.PushBack(700);
+            Console.WriteLine(easyDeque.PopFront());
+            Console.WriteLine(easyDeque.PopBack());
+            Console.WriteLine(easyDeque.PopFront());
+            Console.WriteLine(easyDeque.PopBack());
+
+            Console.ReadLine();
+
+
+
             var linkedQueue = new LinkedQueue<int>();
             linkedQueue.Enqueue(1);
             linkedQueue.Enqueue(2);
