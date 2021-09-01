@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Set
 {
-    public class EasySet<T>
+    public class EasySet<T> : IEnumerable
     {
         private List<T> items = new List<T>();
         public int Count => items.Count;
@@ -45,7 +45,7 @@ namespace Set
         {
             //return new EasySet<T>(items.Union(set.items)); // реализация через LINQ 
 
-            EasySet<T> result = new EasySet<T>;  // длинная реализация
+            EasySet<T> result = new EasySet<T>();  // длинная реализация
             foreach (var item in items)
             {
                 result.Add(item);
@@ -58,7 +58,7 @@ namespace Set
         }
         public EasySet<T> Intersection(EasySet<T> set)
         {
-            return new EasySet<T>(items.Intersect(set.items));  // через LINQ в одну строчку! нифига себе
+            //return new EasySet<T>(items.Intersect(set.items));  // через LINQ в одну строчку! нифига себе
 
             var result = new EasySet<T>();
             EasySet<T> big;
@@ -83,9 +83,85 @@ namespace Set
                         break;
                     }
                 }
-
             }
             return result;
+        }
+        public EasySet<T> Difference(EasySet<T> set)
+        {
+            //return new EasySet<T>(items.Except(set.items)); // в одну строчку через LINQ!
+
+            var result = new EasySet<T>(items);
+            foreach(var item in set.items)
+            {
+                result.Remove(item);
+            }
+            return result;
+        }
+        public bool Subset(EasySet<T> set)
+        {
+            //return items.All(i => set.items.Contains(i)); // в одну строчку! :)
+
+            foreach (var item1 in items)
+            {
+                var equals = false;
+                foreach (var item2 in set.items)
+                {
+                    if (item1.Equals(item2))
+                    {
+                        equals = true;
+                        break;
+                    }
+                }
+                if (!equals)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public EasySet<T> SymmetricDifference(EasySet<T> set)
+        {
+            //return new EasySet<T>(items.Except(set.items).Union(set.items.Except(items))); // сделали 2 разности и объединили их! элементарно!
+
+            var result = new EasySet<T>(items);  // по сути можно реализовать через вызов Difference
+            foreach(var item1 in set.items)      // то же самое жеж
+            {
+                var equals = false;
+                foreach(var item2 in items)
+                {
+                    if (item1.Equals(item2))
+                    {
+                        equals = true;
+                        break;
+                    }
+                }
+                if (!equals)
+                {
+                    result.Add(item1);
+                }
+            }
+            foreach (var item1 in items)
+            {
+                var equals = false;
+                foreach (var item2 in set.items)
+                {
+                    if (item1.Equals(item2))
+                    {
+                        equals = true;
+                        break;
+                    }
+                }
+                if (!equals)
+                {
+                    result.Add(item1);
+                }
+            }
+            return result;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return items.GetEnumerator();
         }
     }
 }
