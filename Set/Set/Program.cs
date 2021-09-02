@@ -60,15 +60,15 @@ namespace Set
 
             Console.WriteLine();
             Console.Write("A Subset C: ");
-            Console.WriteLine(easyset1.Subset(easyset3));
+            Console.Write(easyset1.Subset(easyset3));
             Console.WriteLine();
             
             Console.Write("C Subset A: ");
-            Console.WriteLine(easyset3.Subset(easyset1));
+            Console.Write(easyset3.Subset(easyset1));
             Console.WriteLine();
 
             Console.Write("C Subset B: ");
-            Console.WriteLine(easyset3.Subset(easyset2));
+            Console.Write(easyset3.Subset(easyset2));
             Console.WriteLine();
 
             Console.Write("Symmetric Difference: ");

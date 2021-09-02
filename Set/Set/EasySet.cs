@@ -123,11 +123,12 @@ namespace Set
         {
             //return new EasySet<T>(items.Except(set.items).Union(set.items.Except(items))); // сделали 2 разности и объединили их! элементарно!
 
-            var result = new EasySet<T>(items);  // по сути можно реализовать через вызов Difference
-            foreach(var item1 in set.items)      // то же самое жеж
+            var result = new EasySet<T>();  // по сути можно реализовать через вызов Difference
+            foreach(var item1 in items)      // то же самое жеж
             {
                 var equals = false;
-                foreach(var item2 in items)
+
+                foreach(var item2 in set.items)
                 {
                     if (item1.Equals(item2))
                     {
@@ -135,15 +136,15 @@ namespace Set
                         break;
                     }
                 }
-                if (!equals)
+                if (equals == false)
                 {
                     result.Add(item1);
                 }
             }
-            foreach (var item1 in items)
+            foreach (var item1 in set.items)
             {
                 var equals = false;
-                foreach (var item2 in set.items)
+                foreach (var item2 in items)
                 {
                     if (item1.Equals(item2))
                     {
@@ -151,7 +152,7 @@ namespace Set
                         break;
                     }
                 }
-                if (!equals)
+                if (equals == false)
                 {
                     result.Add(item1);
                 }
