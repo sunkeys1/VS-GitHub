@@ -15,5 +15,9 @@ namespace Hashtable
         {
             return Name;     
         }
+        public override int GetHashCode()
+        {
+            return Name.Length + Age + Gender + (int)Name[];
+        }
     }
 }
