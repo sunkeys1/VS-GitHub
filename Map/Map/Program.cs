@@ -10,6 +10,33 @@ namespace Map
     {
         static void Main(string[] args)
         {
+            var dict = new Dict<int, string>();
+            dict.Add(new Item<int, string>(1, "Один"));
+            dict.Add(new Item<int, string>(2, "Два"));
+            dict.Add(new Item<int, string>(3, "Три"));
+            dict.Add(new Item<int, string>(4, "Четыре"));
+            dict.Add(new Item<int, string>(5, "Пять"));
+            foreach (var item in dict)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine(dict.Search(7) ?? "Нету такого!");
+            Console.WriteLine(dict.Search(3) ?? "Нету такого!");
+            dict.Remove(3);
+            dict.Remove(1);
+            foreach (var item in dict)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+
+            Console.ReadLine();
+
+
+
+
             var easyMap = new EasyMap<int, string>();
             easyMap.Add(new Item<int, string>(1, "Один"));
             easyMap.Add(new Item<int, string>(2, "Два"));
