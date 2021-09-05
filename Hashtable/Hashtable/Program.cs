@@ -10,6 +10,18 @@ namespace Hashtable
     {
         static void Main(string[] args)
         {
+            var superHashTable = new SuperHashTable<Person>(100);
+            var person = new Person() { Name = "Борис", Age = 15, Gender = 0 };
+            superHashTable.Add(new Person() { Name = "Борис", Age = 15, Gender = 3});
+            superHashTable.Add(new Person() { Name = "Василис", Age = 5, Gender = 2 });
+            superHashTable.Add(new Person() { Name = "Жульбан", Age = 15, Gender = 3 });
+            superHashTable.Add(person);
+            Console.WriteLine(superHashTable.Search(new Person() { Name = "Борис", Age = 15, Gender = 3 }));
+            Console.WriteLine(superHashTable.Search(person));
+
+
+            Console.ReadLine();
+
             var hashTable = new HashTable<int, string>(100); // тут берется первая цифра от ключа
             hashTable.Add(6, "Опа");
             hashTable.Add(81, "Как ты сюда попал?"); 

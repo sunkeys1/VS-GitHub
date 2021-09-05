@@ -12,6 +12,10 @@ namespace Hashtable
         public SuperHashTable(int size)
         {
             items = new Item<T>[size];
+            for(int i = 0; i < items.Length; i++)
+            {
+                items[i] = new Item<T>(i);
+            }
 
         }
         public void Add(T item)
