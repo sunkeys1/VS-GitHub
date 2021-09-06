@@ -12,10 +12,12 @@ namespace Map
         {
             var dict = new Dict<int, string>();
             dict.Add(new Item<int, string>(1, "Один"));
+            dict.Add(new Item<int, string>(1, "Один"));
             dict.Add(new Item<int, string>(2, "Два"));
             dict.Add(new Item<int, string>(3, "Три"));
             dict.Add(new Item<int, string>(4, "Четыре"));
             dict.Add(new Item<int, string>(5, "Пять"));
+            dict.Add(new Item<int, string>(101, "Сто один"));
             foreach (var item in dict)
             {
                 Console.WriteLine(item);
@@ -24,6 +26,9 @@ namespace Map
 
             Console.WriteLine(dict.Search(7) ?? "Нету такого!");
             Console.WriteLine(dict.Search(3) ?? "Нету такого!");
+            Console.WriteLine(dict.Search(101) ?? "Нету такого!");
+            dict.Remove(88);
+            dict.Remove(101);
             dict.Remove(3);
             dict.Remove(1);
             foreach (var item in dict)
