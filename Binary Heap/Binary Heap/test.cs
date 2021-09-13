@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Binary_Heap
 {
-    class Program
+    class test
     {
-        static void Main(string[] args)
+        public test()
         {
-
-            Console.ReadLine();
+            
         }
     }
 }
