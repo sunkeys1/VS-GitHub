@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Binary_Heap
 {
-    class Heap  // можно TKey, TValue (чтобы вес элементов смотреть\задавать)
+    class Heap : IEnumerable  // можно TKey, TValue (чтобы вес элементов смотреть\задавать)
     {
         private List<int> items = new List<int>();
         public int Count => items.Count;
@@ -20,6 +21,16 @@ namespace Binary_Heap
             {
                 return null;
             }
+        }
+        public Heap() { }
+        public Heap(List<int> items)
+        {
+            this.items.AddRange(items);
+            for(int i = Count; i >= 0; i--)
+            {
+                Sort(i);
+            }
+            
         }
         public void Add(int item)
         {
@@ -41,36 +52,39 @@ namespace Binary_Heap
             var result = items[0];
             items[0] = items[Count - 1];
             items.RemoveAt(Count - 1);
-            Sort();
+            Sort(0);
             return result;
         }
         private void Sort(int currentIndex)
         {
+            int maxIndex = currentIndex;
             int leftIndex;
             int rightIndex;
-            int maxIndex;
 
             while(currentIndex < Count)
             {
-                maxIndex = currentIndex;
                 leftIndex = 2 * currentIndex + 1;
                 rightIndex = 2 * currentIndex + 2;
 
-                if(items[leftIndex] > items[maxIndex])
+                if(leftIndex < Count && items[leftIndex] > items[maxIndex])
                 {
                     maxIndex = leftIndex;
 
                 }
-                if (items[rightIndex] > items[maxIndex])
+                if (rightIndex < Count && items[rightIndex] > items[maxIndex])
                 {
-                    maxIndex = rightIndex; // тута
+                    maxIndex = rightIndex;
 
                 }
-
+                if(maxIndex == currentIndex)
+                {
+                    break;
+                }
+                Swap(currentIndex, maxIndex);
+                currentIndex = maxIndex;
 
             }
         }
-
         private void Swap(int currentIndex, int parentIndex)
         {
             int temp = items[currentIndex];
@@ -81,6 +95,14 @@ namespace Binary_Heap
         private  int GetParentIndex(int currentIndex)
         {
             return (currentIndex - 1) / 2;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            while(Count > 0)
+            {
+                yield return GetMax();
+            }
         }
     }
 }
