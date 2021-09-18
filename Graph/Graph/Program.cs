@@ -36,6 +36,14 @@ namespace Graph
             graph.AddEdge(v5, v6);
 
             var matrix = graph.GetMatrix();
+            
+            for (int i = 0; i < graph.VertexCount; i++)
+            {
+                Console.Write($"  | {i + 1} |");
+            }
+            Console.WriteLine();
+            Console.WriteLine("_________________________________________________");
+            
             for (int i = 0; i < graph.VertexCount; i++)
             {
                 Console.Write(i + 1);
@@ -46,12 +54,7 @@ namespace Graph
                 Console.WriteLine();
             }
 
-            Console.WriteLine("_________________________________________________");
-            Console.WriteLine();
-            for (int i = 0; i < graph.VertexCount; i++)
-            {
-                Console.Write($"  | {i + 1} |");
-            }
+            
 
 
             Console.ReadLine();
