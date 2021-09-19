@@ -34,30 +34,56 @@ namespace Graph
             graph.AddEdge(v2, v6);
             graph.AddEdge(v6, v5);
             graph.AddEdge(v5, v6);
+            GetMatrix(graph);
+            Console.WriteLine();
+            Console.WriteLine();
 
+            GetVertex(graph, v1);
+            GetVertex(graph, v2);
+            GetVertex(graph, v3);
+            GetVertex(graph, v4);
+            GetVertex(graph, v5);
+            GetVertex(graph, v6);
+            GetVertex(graph, v7);
+
+            Console.WriteLine();
+            Console.WriteLine(graph.Wave(v5, v6));
+            Console.WriteLine(graph.Wave(v1, v3));
+            Console.WriteLine(graph.Wave(v5, v4));
+
+
+            Console.ReadLine();
+        }
+        
+        private static void GetVertex(Graph graph, Vertex vertex)
+        {
+            Console.Write(vertex.Number + ": ");
+            foreach (var v in graph.GetVertexLists(vertex))
+            {
+                Console.Write(v.Number + ", ");
+            }
+            Console.WriteLine();
+        }
+        private static void GetMatrix(Graph graph)
+        {
             var matrix = graph.GetMatrix();
-            
+
             for (int i = 0; i < graph.VertexCount; i++)
             {
                 Console.Write($"  | {i + 1} |");
             }
             Console.WriteLine();
             Console.WriteLine("_________________________________________________");
-            
+
             for (int i = 0; i < graph.VertexCount; i++)
             {
                 Console.Write(i + 1);
                 for (int j = 0; j < graph.VertexCount; j++)
                 {
-                    Console.Write(" | " + matrix[i, j] + " | "); 
+                    Console.Write(" | " + matrix[i, j] + " | ");
                 }
                 Console.WriteLine();
             }
-
-            
-
-
-            Console.ReadLine();
         }
     }
 }
