@@ -18,9 +18,30 @@ namespace Classes
             Console.WriteLine(p.FullName);
             Console.WriteLine(p.ShortName);
             Console.WriteLine();
-            Console.ReadLine();
-            
-        }
 
+            //Console.Write("Введите конец диапазона от 1 до : ");
+            //int end = int.Parse(Console.ReadLine());
+
+            for(int i = 0; i < 10; i++)
+            {
+                Console.Write(fibb(i) + " ");
+            }
+           
+
+            Console.ReadLine();
+        }
+        public static int fibb(int c)
+        {
+            int a = 0;
+            int b = 1;
+            for(int i = 0; i < c; i++)
+            {
+                int t = a;
+                a = b;
+                b = t + a;
+            }
+            
+            return a;
+        }
     }
 }

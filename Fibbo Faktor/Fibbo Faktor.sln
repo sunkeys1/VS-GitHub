@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibbo Faktor", "Fibbo Faktor\Fibbo Faktor.csproj", "{9970EF81-173E-43E2-9F0C-E88A5FE5D67F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9970EF81-173E-43E2-9F0C-E88A5FE5D67F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9970EF81-173E-43E2-9F0C-E88A5FE5D67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9970EF81-173E-43E2-9F0C-E88A5FE5D67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9970EF81-173E-43E2-9F0C-E88A5FE5D67F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40F704BB-2DD1-419C-86A7-8307C9F53DBA}
+	EndGlobalSection
+EndGlobal
