@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrmBl.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +15,12 @@ namespace CrmUi
     public partial class Catalog<T> : Form
         where T : class
     {
-        public Catalog(DbSet<T> set)
+        CrmContext db;
+        public Catalog(DbSet<T> set, CrmContext db)
         {
             InitializeComponent();
+            this.db = db;
+            set.Load();
             dataGridView.DataSource = set.Local.ToBindingList();
         }
 
@@ -24,5 +28,28 @@ namespace CrmUi
         {
 
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if(typeof(T) == typeof(Product))
+            {
+
+            }
+            else if(typeof(T) == typeof(Seller))
+            {
+
+            }
+            else if (typeof(T) == typeof(Customer))
+            {
+
+            }
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            var id = dataGridView.SelectedRows[0].Cells[0].Value;
+
+        }
+        private form // тут
     }
 }
