@@ -17,6 +17,7 @@ namespace CrmBl.Model
         //(если слишком большая очередь, уходит из магазина ничего не купив)
         public bool IsModel { get; set; } // будет ли выполняться сохранение в БД
         public int Count => Queue.Count;
+        public event EventHandler<Check> CheckClosed;
         public CashDesk(int number, Seller seller)
         {
             Number = number;
@@ -84,10 +85,12 @@ namespace CrmBl.Model
                         sum += product.Price;
                     }
                 }
+                check.Price = sum;
                 if (!IsModel)
                 {
                     db.SaveChanges();
                 }
+                CheckClosed?.Invoke(this, check);
             }
             return sum;
         }
