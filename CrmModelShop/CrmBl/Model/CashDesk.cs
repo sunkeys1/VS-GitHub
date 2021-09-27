@@ -24,10 +24,11 @@ namespace CrmBl.Model
             Seller = seller;
             Queue = new Queue<Cart>();
             IsModel = true;
+            MaxQueueLength = 10;
         }
         public void Enqueue(Cart cart)
         {
-            if(Queue.Count <= MaxQueueLength)
+            if(Queue.Count < MaxQueueLength)
             {
                 Queue.Enqueue(cart);
             }

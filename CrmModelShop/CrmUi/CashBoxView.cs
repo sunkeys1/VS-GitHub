@@ -11,42 +11,51 @@ namespace CrmUi
     class CashBoxView
     {
         CashDesk cashDesk;
-        public Label Label { get; set; }
-        public NumericUpDown NumericUpDown { get; set; }
-        public ProgressBar ProgressBar { get; set;}
+        public Label CashDeskName { get; set; }
+        public NumericUpDown Price { get; set; }
+        public ProgressBar QueueLength { get; set;}
+        public Label LeaveCustomersCount { get; set; }
         public CashBoxView(CashDesk cashDesk, int number, int x, int y)
         {
             this.cashDesk = cashDesk;
-            Label = new Label();
-            NumericUpDown = new NumericUpDown();
-            ProgressBar = new ProgressBar();
+            CashDeskName = new Label();
+            Price = new NumericUpDown();
+            QueueLength = new ProgressBar();
+            LeaveCustomersCount = new Label();
 
-            Label.AutoSize = true;
-            Label.Location = new System.Drawing.Point(x, y);
-            Label.Name = "label" + number;
-            Label.Size = new System.Drawing.Size(35, 13);
-            Label.TabIndex = number;
-            Label.Text = cashDesk.ToString();
+            CashDeskName.AutoSize = true;
+            CashDeskName.Location = new System.Drawing.Point(x, y);
+            CashDeskName.Name = "label" + number;
+            CashDeskName.Size = new System.Drawing.Size(35, 13);
+            CashDeskName.TabIndex = number;
+            CashDeskName.Text = cashDesk.ToString();
 
             // 
             // numericUpDown1 // это просто кусок кода из InitializeComponent(); 
             //                   там где создаются штуки на самой форме
             // 
-            NumericUpDown.Location = new System.Drawing.Point(x + 70, y);
-            NumericUpDown.Name = "numericUpDown" + number;
-            NumericUpDown.Size = new System.Drawing.Size(120, 20);
-            NumericUpDown.TabIndex = number;
-            NumericUpDown.Maximum = 10000000000;
+            Price.Location = new System.Drawing.Point(x + 70, y);
+            Price.Name = "numericUpDown" + number;
+            Price.Size = new System.Drawing.Size(120, 20);
+            Price.TabIndex = number;
+            Price.Maximum = 10000000000;
 
             // 
             // progressBar1
             // 
-            ProgressBar.Location = new System.Drawing.Point(59, 59);
-            ProgressBar.Maximum = 10;
-            ProgressBar.Name = "progressBar1";
-            ProgressBar.Size = new System.Drawing.Size(100, 23); // тута стоп
-            ProgressBar.TabIndex = 1;
-            ProgressBar.Value = 1;
+            QueueLength.Location = new System.Drawing.Point(x + 250, y);
+            QueueLength.Maximum = cashDesk.MaxQueueLength;
+            QueueLength.Name = "progressBar" + number;
+            QueueLength.Size = new System.Drawing.Size(100, 23); 
+            QueueLength.TabIndex = number;
+            QueueLength.Value = 0;
+
+            LeaveCustomersCount.AutoSize = true;
+            LeaveCustomersCount.Location = new System.Drawing.Point(x + 400, y);
+            LeaveCustomersCount.Name = "label2" + number;
+            LeaveCustomersCount.Size = new System.Drawing.Size(35, 13);
+            LeaveCustomersCount.TabIndex = number;
+            LeaveCustomersCount.Text = "";
 
             cashDesk.CheckClosed += CashDesk_CheckClosed;
         }
@@ -54,11 +63,16 @@ namespace CrmUi
         private void CashDesk_CheckClosed(object sender, Check e)
         {
             //NumericUpDown.Value += e.Price; если сделать так, вылетает эксепшен:
-            // попытка доступа к элементу управления '' не из того потока
-            NumericUpDown.Invoke((Action)delegate { NumericUpDown.Value += e.Price; }); // вот такую конструкцию используешь и будет четко
+            // попытка доступа к элементу управления '' не из того потока.
+            // NumericUpDown.Invoke((Action)delegate { NumericUpDown.Value += e.Price; }); // вот такую конструкцию используешь и будет четко
             // по сути она перекидывает выполнение действия из асинхронного потока в основной и оно обновляется
             // чтобы не вылетал еще один эксепшен при закрытии окна, в свойстве(FormClosing) добавить model.Stop();
-
+            Price.Invoke((Action)delegate
+            {
+                Price.Value += e.Price;
+                QueueLength.Value = cashDesk.Count;
+                LeaveCustomersCount.Text = cashDesk.ExitCustomer.ToString();
+            });
         }
     }
 }
