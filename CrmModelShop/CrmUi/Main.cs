@@ -14,15 +14,27 @@ namespace CrmUi
     public partial class Main : Form
     {
         CrmContext db;
+        Cart cart;
+        Customer customer;
         public Main()
         {
             InitializeComponent();
             db = new CrmContext();
+            cart = new Cart(customer);
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-
+            Task.Run(() =>
+            {
+                listBox1.Invoke((Action)delegate
+                {
+                    listBox1.Items.AddRange(db.Products.ToArray());
+                    UpdateLists();
+                });
+                
+            });
+            
         }
         private void ProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -82,6 +94,65 @@ namespace CrmUi
         {
             var form = new ModelForm();
             form.Show();
+        }
+
+        private void ListBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if(listBox1.SelectedItem is Product product)
+            {
+                cart.Add(product);
+                listBox2.Items.Add(product);
+                UpdateLists();
+            }
+        }
+        private void UpdateLists()
+        {
+            listBox2.Items.Clear();
+            listBox2.Items.AddRange(cart.GetAll().ToArray());
+            label1.Text = "Общая стоимость: " + cart.Price + "₽";
+        }
+
+        private void ListBox2_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedItem is Product product)
+            {
+                cart.Remove(product);
+                listBox2.Items.Remove(product);
+                UpdateLists();
+            }
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = new Login();
+            form.ShowDialog();
+            if(form.DialogResult == DialogResult.OK)
+            {
+                var tempCustomer = db.Customers.FirstOrDefault(c => c.Name.Equals(form.Customer.Name));
+                if(tempCustomer != null)
+                {
+                    customer = tempCustomer;
+                }
+                else
+                {
+                    db.Customers.Add(form.Customer);
+                    db.SaveChanges();
+                    customer = form.Customer;
+                }
+            }
+            linkLabel1.Text = $"Здравствуй, {customer.Name}";
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if(customer != null)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Авторизуйтесь, пожалуйста.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
