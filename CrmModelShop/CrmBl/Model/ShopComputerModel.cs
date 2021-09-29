@@ -11,6 +11,9 @@ namespace CrmBl.Model
     {
         Generator Generator = new Generator();
         Random rnd = new Random();
+        List<Task> tasks = new List<Task>();
+        CancellationTokenSource cancelTokenSource; // супер хитрый механизм убийства таксков (аля флаг)
+        CancellationToken token;
         bool isWorking = false;
         public List<CashDesk> CashDesks { get; set; } = new List<CashDesk>(); // это инициализация списка
         public List<Cart> Carts { get; set; } = new List<Cart>();
@@ -24,22 +27,26 @@ namespace CrmBl.Model
             var sellers = Generator.GetNewSellers(20);
             Generator.GetNewProducts(1000);
             Generator.GetNewCustomers(100);
-            foreach(var seller in sellers)
+
+            cancelTokenSource = new CancellationTokenSource();
+            token = cancelTokenSource.Token;
+
+            foreach (var seller in sellers)
             {
                 Sellers.Enqueue(seller);
             }
             
             for(int i = 0; i < 3; i++)
             {
-                CashDesks.Add(new CashDesk(CashDesks.Count, Sellers.Dequeue()));
+                CashDesks.Add(new CashDesk(CashDesks.Count, Sellers.Dequeue(), null));
             }
         }
         public void Start()
         {
-            isWorking = true;
-            Task.Run(() => CreateCarts(10)); // вывели в отдельный поток
-            var cashDeskTasks = CashDesks.Select(c => new Task(() => CashDeskWork(c)));
-            foreach(var task in cashDeskTasks)
+
+            tasks.Add(new Task(() => CreateCarts(10, token))); // вывели в отдельный поток
+            tasks.AddRange(CashDesks.Select(c => new Task(() => CashDeskWork(c, token))));
+            foreach(var task in tasks)
             {
                 task.Start();
             }
@@ -47,11 +54,11 @@ namespace CrmBl.Model
         }
         public void Stop()
         {
-            isWorking = false;
+           cancelTokenSource.Cancel();
         }
-        private void CashDeskWork(CashDesk cashDesk)
+        private void CashDeskWork(CashDesk cashDesk, CancellationToken token)
         {
-            while (isWorking)
+            while (!token.IsCancellationRequested)
             {
                 if (cashDesk.Count > 0)
                 {
@@ -61,9 +68,9 @@ namespace CrmBl.Model
             }
         }
 
-        private void CreateCarts(int customerCounts)
+        private void CreateCarts(int customerCounts, CancellationToken token)
         {
-            while (isWorking)
+            while (!token.IsCancellationRequested)
             {
                 var customers = Generator.GetNewCustomers(customerCounts);
                 

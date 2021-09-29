@@ -8,7 +8,7 @@ namespace CrmBl.Model
 {
     public class CashDesk
     {
-        CrmContext db = new CrmContext();
+        CrmContext db;
         public int Number { get; set; } // номер кассы
         public Seller Seller { get; set; } // продавец
         public Queue<Cart> Queue { get; set; } // очередь из телег
@@ -18,13 +18,14 @@ namespace CrmBl.Model
         public bool IsModel { get; set; } // будет ли выполняться сохранение в БД
         public int Count => Queue.Count;
         public event EventHandler<Check> CheckClosed;
-        public CashDesk(int number, Seller seller)
+        public CashDesk(int number, Seller seller, CrmContext db)
         {
             Number = number;
             Seller = seller;
             Queue = new Queue<Cart>();
             IsModel = true;
             MaxQueueLength = 10;
+            this.db = db ?? new CrmContext();
         }
         public void Enqueue(Cart cart)
         {

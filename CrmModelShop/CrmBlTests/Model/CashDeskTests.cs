@@ -46,7 +46,7 @@ namespace CrmBl.Model.Tests
             };
             var cart1 = new Cart(customer1);
             var cart2 = new Cart(customer2);
-            var cashdesk = new CashDesk(1, seller);
+            var cashdesk = new CashDesk(1, seller, null);
             var cart1ExpectedResult = 500;
             var cart2ExpectedResult = 700;
             // action
