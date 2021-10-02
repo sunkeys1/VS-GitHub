@@ -55,6 +55,7 @@ namespace CrmBl.Model
         public void Stop()
         {
            cancelTokenSource.Cancel();
+            Thread.Sleep(500);
         }
         private void CashDeskWork(CashDesk cashDesk, CancellationToken token)
         {

@@ -144,8 +144,13 @@ namespace CrmUi
                     customer = form.Customer;
                 }
                 cart.Customer = customer;
+                linkLabel1.Text = $"Здравствуй, {customer.Name}";
             }
-            linkLabel1.Text = $"Здравствуй, {customer.Name}";
+            else
+            {
+                //MessageBox.Show("опа");
+            }
+            
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -163,6 +168,11 @@ namespace CrmUi
             {
                 MessageBox.Show("Авторизуйтесь, пожалуйста.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBox1.Update();
         }
     }
 }
