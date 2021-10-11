@@ -21,6 +21,7 @@ namespace Algorithm
                     if (a.CompareTo(b) == 1) // компарабле для сравнения штук с T типом можно юзать
                     {
                         Swap(i, i + 1);
+                        ComparisonCount++;
                     }
                 }
                 
